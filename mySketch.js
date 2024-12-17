@@ -11,6 +11,9 @@ var showCamera = false;
 var noButtonDodging = false;
 var soundMysterious, buttonClickSound, cameraSound;
 
+// camera h and w for 16:9
+var h, w;
+
 var cam;
 var curCamAlpha = 0;
 var font;
@@ -34,6 +37,7 @@ textAlign(CENTER, CENTER);
 textSize(32);
 textFont(font);
 
+	
 // Play background music in a loop
 soundMysterious.loop();
 
@@ -118,7 +122,7 @@ if (stage === 0) {
 	var txtboxw = width - 100;
 	fill("#FF0000");
 	textSize(20); // THROUGH THE MIRROR textsize
-	text("THROUGH THE MIRROR by IRIS ERYILMAZ", 440, 581);
+	text("THROUGH THE MIRROR by IRIS ERYILMAZ", width / 2 - txtboxw / 2, height / 1 - 120, txtboxw);
 
 	fill(255);
 	textSize(32); 
@@ -175,10 +179,13 @@ else if (stage === 1) {
 				cameraSound.play();
 			} 
 		}
+		w = window.innerWidth;
+		h = (w * 9) / 16;
 
-		cam = createCapture(VIDEO).size(width, height).position(0, 0);
+		cam = createCapture(VIDEO).size(w, h).position(0, 0);
 		cam.hide();
 		initTime = millis();
+ 
 	} else {
 		curCamAlpha = curCamAlpha + 0.2;
 		if (curCamAlpha >= 255) {
@@ -197,6 +204,7 @@ else if (stage === 1) {
 	text("This is the person you just met.", width / 2, height - 80);
 }
 }
+
 
 function handleYes() {
 buttonClickSound.play();
